@@ -1,0 +1,40 @@
+https://servername.org {
+
+	proxy / 127.0.0.1:8000 {
+		websocket
+		transparent
+	}
+	
+	header / {
+		X-Frame-Options 					"SAMEORIGIN"
+		X-XSS-Protection 					"1; mode=block"
+		Referrer-Policy 					"strict-origin"
+		X-Content-Type-Options				"nosniff" always;
+		X-Permitted-Cross-Domain-Policies	"none"
+		Strict-Transport-Security 			"max-age=300; includeSubDomains; always"
+		X-Robots-Tag 						"none"
+		Access-Control-Allow-Methods 		"GET, POST, PUT"
+		Content-Security-Policy 			"upgrade-insecure-requests"
+		Feature-Policy 						"accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'self'; camera 'none'; encrypted-media 'none'; fullscreen 'self'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture *; speaker 'none'; sync-xhr 'none'; usb 'none'; vr 'none'"
+		-Server
+	}
+	
+	tls email@email.com {
+		protocols tls1.2 tls1.3
+	}
+	
+	
+	limits {
+		header 100KB
+		body 100MB
+	}
+	
+	timeouts {
+		read 36000s
+		body 600s
+	}
+	
+	
+	root /home/a/t/server/www/.well-known/
+	
+}
